@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+.CFUserTextEncoding
+
+# Shell / config
+.zsh_history
+.zsh_sessions/
+.local/
+.npm/
+.cups/
+.gitconfig
+.claude.json
+.claude.json.backup
+.claude/
+.copilot/
+.vscode/
+.vscode-shared/
+.km-vm-store/
+.synamedia/
+
+# Home directories — exclude everything except this project
+Applications/
+Library/
+Movies/
+Music/
+OneDrive - University of Edinburgh
+Pictures/
+Public/
+Sites/
+Evac-AI-Project-2-/
+dpa-app/
+design-input.md
