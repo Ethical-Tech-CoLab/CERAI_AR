@@ -614,7 +614,8 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
   <!-- Location -->
   <div class="field full" style="margin-bottom:12px">
     <label>Location / Area of Assessment <span class="q" data-tip="Free-text location name used in exports and API calls. Does not affect scoring. Used to label reports and fetch weather/ACLED data.">?</span></label>
-    <input type="text" id="locationInput" placeholder="e.g. Mariupol, Ukraine" oninput="calcScore()">
+    <input type="text" id="locationInput" placeholder="e.g. Mariupol, Ukraine" oninput="calcScore()" onkeydown="if(event.key==='Enter'){event.preventDefault();geocodeLocation()}">
+    <div id="location-status" style="font-size:.68rem;color:var(--text2);margin-top:4px"></div>
   </div>
 
   <!-- SECTION 1: THREAT & HOSTILITIES -->
@@ -1046,16 +1047,17 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
           <label>Longitude</label>
           <input type="number" id="apiLon" placeholder="e.g. 37.5494" step="0.0001">
         </div>
-        <div class="field full">
-          <label>ACLED API Key (stored locally, never transmitted elsewhere)</label>
-          <input type="password" id="acledKey" placeholder="ACLED API key" oninput="localStorage.setItem('cerai-acled-key',this.value)">
-        </div>
-        <div class="field full">
-          <label>ACLED Email</label>
-          <input type="text" id="acledEmail" placeholder="your@email.com" oninput="localStorage.setItem('cerai-acled-email',this.value)">
-        </div>
       </div>
-      <button class="update-btn" onclick="fetchAllLiveData()">Fetch Live Data</button>
+      <div style="font-size:.75rem;color:var(--text2);background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:8px 10px;margin-top:8px">
+        Ensure you are logged into <a href="https://acleddata.com" target="_blank">acleddata.com</a> in this browser before fetching ACLED data.
+      </div>
+      <button class="update-btn" onclick="testACLEDConnection()" style="margin-top:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2)">Test Connection</button>
+      <div id="acled-conn-status" style="font-size:.72rem;margin-top:5px"></div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="update-btn" style="flex:1" onclick="geocodeLocation()">Fetch Weather (from location)</button>
+        <button class="update-btn" style="flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text2)" onclick="fetchACLEDDirect()">Fetch ACLED</button>
+      </div>
+      <button class="update-btn" onclick="fetchAllLiveData()" style="margin-top:6px">Fetch All Live Data (lat/lon)</button>
       <div id="api-status" style="font-size:.72rem;color:var(--text2);margin-top:6px"></div>
     </div>
   </div>
@@ -2517,6 +2519,44 @@ function mapWeatherCode(code) {
   return 'adverse';
 }
 
+async function geocodeLocation() {
+  const locEl = v('locationInput');
+  const locName = locEl ? locEl.value.trim() : '';
+  const status = v('api-status');
+  const locStatus = v('location-status');
+  if (!locName) {
+    if (locStatus) locStatus.textContent = 'Enter a location name first.';
+    return;
+  }
+  if (locStatus) locStatus.textContent = 'Geocoding...';
+  if (status) status.textContent = 'Geocoding via Nominatim...';
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locName)}&format=json&limit=1`;
+    const r = await fetch(url, {headers:{'Accept-Language':'en'}});
+    const d = await r.json();
+    if (d && d.length > 0) {
+      const lat = parseFloat(d[0].lat);
+      const lon = parseFloat(d[0].lon);
+      if (v('apiLat')) v('apiLat').value = lat.toFixed(4);
+      if (v('apiLon')) v('apiLon').value = lon.toFixed(4);
+      if (locStatus) locStatus.textContent = `Geocoded: ${d[0].display_name.substring(0,60)}… (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+      if (status) status.textContent = `Geocoded: (${lat.toFixed(4)}, ${lon.toFixed(4)}) — fetching weather...`;
+      await fetchWeather(lat, lon);
+    } else {
+      if (locStatus) locStatus.textContent = 'Location not found. Try a different name or enter coordinates manually.';
+      if (status) status.textContent = 'Location not found.';
+    }
+  } catch(e) {
+    if (locStatus) locStatus.textContent = 'Geocoding failed: ' + e.message;
+    if (status) status.textContent = 'Geocoding failed: ' + e.message;
+  }
+}
+
+async function fetchACLEDDirect() {
+  const locName = v('locationInput') ? v('locationInput').value.trim() : '';
+  await fetchACLED(locName);
+}
+
 async function fetchWeather(lat, lon) {
   const status = v('api-status');
   try {
@@ -2538,11 +2578,40 @@ async function fetchWeather(lat, lon) {
   }
 }
 
-async function fetchACLED(country, apiKey, email) {
+async function testACLEDConnection() {
+  const connStatus = v('acled-conn-status');
+  if (connStatus) { connStatus.textContent = 'Testing...'; connStatus.style.color = 'var(--text2)'; }
+  try {
+    const r = await fetch('https://acleddata.com/api/acled/read?limit=1', {credentials:'include'});
+    const d = await r.json();
+    if (d && (d.data || d.count !== undefined)) {
+      if (connStatus) { connStatus.textContent = 'Connected'; connStatus.style.color = '#27ae60'; }
+    } else {
+      if (connStatus) { connStatus.textContent = 'Not connected — please log in at acleddata.com first'; connStatus.style.color = '#e74c3c'; }
+    }
+  } catch(e) {
+    if (connStatus) { connStatus.textContent = 'Not connected — please log in at acleddata.com first'; connStatus.style.color = '#e74c3c'; }
+  }
+}
+
+async function fetchACLED(country) {
   const status = v('api-status');
   try {
-    if (status) status.textContent = 'Note: ACLED requires API key and has CORS restrictions. Use server-side proxy in production.';
-  } catch(e) {}
+    if (status) status.textContent = 'Fetching ACLED data...';
+    const params = new URLSearchParams({country, limit: '50', fields: 'event_date|event_type|fatalities|location'});
+    const r = await fetch(`https://acleddata.com/api/acled/read?${params}`, {credentials:'include'});
+    const d = await r.json();
+    if (d && d.data && d.data.length > 0) {
+      const events = d.data;
+      const fatalities = events.reduce((sum, e) => sum + (parseInt(e.fatalities)||0), 0);
+      if (status) status.textContent = `ACLED: ${events.length} events, ${fatalities} fatalities (${country})`;
+      acledTrajData = {changePct: 0};
+    } else {
+      if (status) status.textContent = 'ACLED: No data returned. Ensure you are logged in at acleddata.com.';
+    }
+  } catch(e) {
+    if (status) status.textContent = 'ACLED fetch failed. Ensure you are logged in at acleddata.com. Error: ' + e.message;
+  }
 }
 
 async function fetchGDELT() {
@@ -2573,15 +2642,19 @@ async function fetchGDELT() {
 async function fetchAllLiveData() {
   const lat = parseFloat(v('apiLat').value);
   const lon = parseFloat(v('apiLon').value);
-  const key = v('acledKey').value || localStorage.getItem('cerai-acled-key')||'';
-  const email = v('acledEmail').value || localStorage.getItem('cerai-acled-email')||'';
   if (!isNaN(lat) && !isNaN(lon)) {
     await fetchWeather(lat, lon);
   } else {
-    v('api-status').textContent = 'Enter latitude and longitude for weather data.';
+    const locName = v('locationInput') ? v('locationInput').value.trim() : '';
+    if (locName) {
+      await geocodeLocation();
+    } else {
+      v('api-status').textContent = 'Enter a location name or latitude/longitude for weather data.';
+    }
   }
-  if (key && email) {
-    await fetchACLED(v('locationInput').value, key, email);
+  const locName = v('locationInput') ? v('locationInput').value.trim() : '';
+  if (locName) {
+    await fetchACLED(locName);
   }
 }
 
@@ -3394,12 +3467,6 @@ function toggleSrcCred(btn) {
 // INIT
 // ====================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Restore API keys from localStorage
-  const savedKey = localStorage.getItem('cerai-acled-key');
-  const savedEmail = localStorage.getItem('cerai-acled-email');
-  if (savedKey && v('acledKey')) v('acledKey').value = savedKey;
-  if (savedEmail && v('acledEmail')) v('acledEmail').value = savedEmail;
-
   buildHistTable();
   calcScore();
   showSnapshotList();
