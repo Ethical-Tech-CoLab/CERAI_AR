@@ -7,7 +7,7 @@ weather, and more) into a composite index with Monte Carlo sensitivity
 analysis, intended to support International Humanitarian Law (IHL) compliance
 review and humanitarian planning.
 
-**Live demo:** https://alanarobertson.github.io/Evac-AI-Project-2-/
+**Live demo:** https://ethical-tech-colab.github.io/CERAI_AR/
 
 > ⚠️ Research prototype. Outputs are indicative and not a substitute for
 > operational decision-making or legal advice.
@@ -30,11 +30,9 @@ The app is a single-file HTML prototype. Either:
 
 ## GitHub Pages
 
-`index.html` at the repo root is served by GitHub Pages. To enable:
-
-1. Repo → **Settings** → **Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` / root → **Save**
+`index.html` at the repo root is served by GitHub Pages from `main` / root,
+published at https://ethical-tech-colab.github.io/CERAI_AR/. Pushing to `main`
+redeploys it.
 
 ## Context
 
