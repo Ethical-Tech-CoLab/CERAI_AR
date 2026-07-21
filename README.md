@@ -1,5 +1,8 @@
 # CERAI — Civilian Evacuation Risk Anticipation Index
 
+**[Live site](https://ethical-tech-colab.github.io/CERAI_AR/)** ·
+**[Research report](CERAI-Paper.md)** (plain-language, non-technical)
+
 CERAI is a research prototype for anticipating civilian risk during evacuation
 operations in armed conflict. It combines multi-category risk indicators
 (hazards, infrastructure, population vulnerability, information environment,
