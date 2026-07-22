@@ -51,7 +51,7 @@ All rights reserved unless otherwise noted. Contact the author before reuse.
 
 ## Peer Review
 
-An independent academic peer review of this report is available in [`peer-review/`](peer-review/) ([Word](peer-review/cerai-Peer-Review.docx) &middot; [Markdown](peer-review/cerai-Peer-Review.md)).
+The full independent academic peer review of this report is in [PEER-REVIEW.md](PEER-REVIEW.md) (also available as [Word](peer-review/cerai-Peer-Review.docx) under [`peer-review/`](peer-review/)).
 
 **Recommendation:** Major revisions
 
