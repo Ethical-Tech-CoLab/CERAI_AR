@@ -1121,7 +1121,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
     <div class="meth-section">
       <h3>Geometric Mean Aggregation</h3>
       <p>CERAI v3 uses the geometric mean rather than the arithmetic mean to aggregate sub-scores. The geometric mean penalises extreme lows more severely: a single sub-score near zero produces a near-zero aggregate score regardless of other sub-scores. This better reflects operational reality: a fully closed evacuation corridor (zone exit = 5%) makes the overall feasibility critically low regardless of how good weather and destination conditions are. The arithmetic mean would mask this single blocking constraint.</p>
-      <div class="formula-box">geoMean(pairs) = exp( sum(weight_i * ln(max(1, val_i))) )
+      <div class="formula-box">geoMeanNorm(pairs) = exp( sum(weight_i * ln(max(1, val_i))) )
 // where pairs = [{val: 0-100, weight: 0-1}] and weights sum to 1.0</div>
     </div>
 
@@ -1571,18 +1571,16 @@ function getCredWeight(fieldId, baseWeight) {
   return baseWeight * mult;
 }
 
-function geoMean(pairs) {
-  let logSum = 0, totalW = 0;
-  for (const {val, weight} of pairs) {
-    logSum += weight * Math.log(Math.max(1, val));
-    totalW += weight;
-  }
-  if (totalW === 0) return 50;
-  return Math.exp(logSum / totalW * totalW);
-}
-
+// Weighted geometric mean. Callers MUST pass weights that already sum to 1.0
+// (every call site normalises with weight/totalWeight first).
+//
+// The Math.max(1, val) floor is deliberate: sub-scores are on a 0-100 scale and
+// a single 0 would send ln(val) to -Infinity and collapse the whole product to
+// 0. Clamping at 1 keeps one missing/zero indicator from annihilating the
+// score. The cost is that genuine sub-scores in [0,1) are all treated as 1, so
+// very low scores read marginally high; that is accepted and is why results are
+// floored at 0 and capped at 95 by the callers.
 function geoMeanNorm(pairs) {
-  // weights should sum to 1.0 already
   let logSum = 0;
   for (const {val, weight} of pairs) {
     logSum += weight * Math.log(Math.max(1, val));
@@ -2456,9 +2454,9 @@ function showSnapshotList() {
       const eSign = diffE>=0?'+':''; const fSign = diffF>=0?'+':'';
       return `<div class="snapshot-item">
         <div>
-          <strong style="color:var(--text)">${s.name}</strong>
-          <span style="color:var(--text2);font-size:.68rem;margin-left:6px">${dt}</span><br>
-          <span style="font-size:.7rem;color:var(--text2)">E:${s.endangerment}% F:${s.feasibility}% &nbsp; vs current: E${eSign}${diffE}% F${fSign}${diffF}%</span>
+          <strong style="color:var(--text)">${esc(s.name)}</strong>
+          <span style="color:var(--text2);font-size:.68rem;margin-left:6px">${esc(dt)}</span><br>
+          <span style="font-size:.7rem;color:var(--text2)">E:${esc(s.endangerment)}% F:${esc(s.feasibility)}% &nbsp; vs current: E${eSign}${diffE}% F${fSign}${diffF}%</span>
         </div>
         <button class="snapshot-del" onclick="deleteSnapshot(${i})">&#215;</button>
       </div>`;
