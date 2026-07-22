@@ -1273,6 +1273,25 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
 
 <script>
 // ====================================================
+// XSS guards — GDELT article fields are third-party data and must never be
+// interpolated raw. esc() escapes HTML; safeUrl() allowlists http(s) so
+// javascript:/data: URLs cannot reach an href.
+// ====================================================
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, c => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+  ));
+}
+function safeUrl(u){
+  const s = String(u ?? '').trim();
+  if(!s) return '';
+  try{
+    const p = new URL(s, window.location.origin);
+    return (p.protocol === 'http:' || p.protocol === 'https:') ? esc(p.href) : '';
+  }catch(_){ return ''; }
+}
+
+// ====================================================
 // HISTORICAL CALIBRATION DATASET (21 face-validity anchor cases, all preserved)
 // ====================================================
 const HISTORICAL_CASES = [
@@ -2503,11 +2522,15 @@ async function fetchGDELT() {
     const r = await fetch(url);
     const d = await r.json();
     if (d.articles && d.articles.length > 0) {
-      el.innerHTML = d.articles.slice(0,8).map(a => `
+      el.innerHTML = d.articles.slice(0,8).map(a => {
+        const u = safeUrl(a.url);
+        const title = esc(a.title||'[no title]');
+        return `
         <div class="gdelt-article">
-          <a href="${a.url}" target="_blank">${a.title||'[no title]'}</a>
-          <div class="gdelt-meta">${a.domain||''} &nbsp;·&nbsp; ${(a.seendate||'').substring(0,8)}</div>
-        </div>`).join('');
+          ${u?`<a href="${u}" target="_blank" rel="noopener noreferrer">${title}</a>`:`<span>${title}</span>`}
+          <div class="gdelt-meta">${esc(a.domain||'')} &nbsp;·&nbsp; ${esc((a.seendate||'').substring(0,8))}</div>
+        </div>`;
+      }).join('');
     } else {
       el.innerHTML = '<div style="color:var(--text2);font-size:.75rem">No articles found. Try a different search term.</div>';
     }
