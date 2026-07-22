@@ -46,3 +46,19 @@ auditable for humanitarian and legal audiences (UN, ICRC).
 ## License
 
 All rights reserved unless otherwise noted. Contact the author before reuse.
+
+---
+
+## Peer Review
+
+An independent academic peer review of this report is available in [`peer-review/`](peer-review/) ([Word](peer-review/cerai-Peer-Review.docx) &middot; [Markdown](peer-review/cerai-Peer-Review.md)).
+
+**Recommendation:** Major revisions
+
+**What the review found:**
+
+- Article 49 GC IV is mischaracterised as a danger-triggered requirement to evacuate, inverting the IHL default (protection in place; displacement restricted) (S1.3/S5.2/S8.1).
+- The tool is described but never evaluated: no weights, no historical-case validation table, no worked example, so the reproducibility claim is uncheckable (S9.3/S10.4).
+- The 75% threshold imposes false numeric precision on a qualitative legal standard with no derivation (S5.2/S5.4).
+
+**Noted strength:** The endangerment/feasibility separation (S1.3, S8.3) is a genuinely valuable, ethically sound contribution that stops operational difficulty from silently overriding the duty to protect.
