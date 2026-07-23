@@ -207,13 +207,28 @@ colour-coded dials running from low risk (green) to extreme risk (deep red and
 purple), with intermediate bands (moderate, elevated, high, critical).
 
 5.2 The 75% threshold. The endangerment gauge carries a marker at 75%.
-This represents the point at which conditions are considered to demand
-evacuation under Article 49 of the Fourth Geneva Convention (which requires
-evacuation "where the security of the population or imperative military reasons
-so demand"). The threshold is indicative only. It flags that conditions
-resemble those which have historically triggered legal obligations; it does
-not itself create a legal obligation, and human legal judgment is always
-required.
+This represents the point at which conditions are considered to engage the
+general obligations to protect civilians from the effects of hostilities: in
+international armed conflict, Additional Protocol I Articles 51, 57 and 58; in
+non-international armed conflict, which governs most of the historical case
+dataset, Common Article 3 and Additional Protocol II Article 17. These are the
+provisions that create the affirmative duty to act.
+
+Article 49 of the Fourth Geneva Convention is deliberately not used as that
+anchor. Article 49 is primarily a prohibition on individual or mass forcible
+transfers and deportations from occupied territory. Evacuation appears in it as
+a narrow conditional permission for an Occupying Power where the security of
+the population or imperative military reasons so demand, and even then the
+displacement must be temporary, with proper accommodation and return once
+hostilities in the area have ceased. The IHL default is protection in place,
+with displacement restricted rather than required. Article 49 accordingly
+constrains and conditions an evacuation rather than triggering one, and CERAI
+uses it in that role -- bearing on whether a proposed movement would itself be
+lawful and protective, not on whether danger demands action.
+
+The threshold is indicative only. It flags that conditions resemble those which
+have historically engaged these obligations; it does not itself create a legal
+obligation, and human legal judgment is always required.
 
 5.3 Confidence bar. The tool shows how much of the assessment is based on
 real, entered data versus cautious "worst-case" default assumptions. When
@@ -286,8 +301,13 @@ specific IHL obligations. The weighting of each risk factor is justified by
 reference to the legal provision it relates to. Examples cited in the tool
 include:
 
-- Fourth Geneva Convention, Article 49: evacuation where security
-  demands;
+- Fourth Geneva Convention, Article 49: prohibition of forcible transfer
+  and deportation from occupied territory, and the conditions an
+  evacuation must satisfy where one is permitted (temporary, adequate
+  accommodation, return once hostilities cease);
+- Common Article 3 and Additional Protocol II, Article 17: protection in
+  non-international armed conflict and the prohibition of forced movement
+  of civilians;
 - Additional Protocol I, Article 51: protection of civilians from
   attack;
 - Additional Protocol I, Article 57: precautions in attack, including

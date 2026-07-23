@@ -383,7 +383,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
         <div class="spectrum-bar">
           <span class="spectrum-pointer" id="spectrum-ptr" style="left:50%">&#9650;</span>
           <div style="position:absolute;left:75%;top:0;width:2px;height:100%;background:#f39c12;opacity:.8"></div>
-          <div style="position:absolute;left:75%;top:-18px;transform:translateX(-50%);font-size:.58rem;color:#f39c12;white-space:nowrap" title="GC IV Art. 49 — conditions demand evacuation above this threshold">IHL 75%</div>
+          <div style="position:absolute;left:75%;top:-18px;transform:translateX(-50%);font-size:.58rem;color:#f39c12;white-space:nowrap" title="Above this threshold, conditions engage the general protection obligations — AP I Arts. 51/57/58 in international armed conflict; Common Art. 3 and AP II Art. 17 in non-international armed conflict">IHL 75%</div>
         </div>
         <div class="spectrum-labels">
           <span>Manageable</span><span>Elevated</span><span>Severe</span><span>Extreme</span><span>Critical</span>
@@ -1312,7 +1312,11 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
 
     <div class="meth-section">
       <h3>IHL Obligation Threshold (75% Marker)</h3>
-      <p>The 75% marker on the Endangerment gauge and spectrum bar represents the threshold at which conditions are considered to demand evacuation under GC IV Article 49, which requires evacuation "where the security of the population or imperative military reasons so demand." This threshold was derived through face validity assessment against the historical case dataset — cases above 75% in the dataset consistently involved IHL evacuation obligations being triggered or having been triggered in retrospective legal analysis. Cases below 75% generally involved precautionary planning obligations rather than immediate evacuation demands. The threshold is indicative only and human legal judgment is required in all cases. Above this threshold, the model reflects conditions that historically correlate with IHL obligations; it does not itself create legal obligations.</p>
+      <p>The 75% marker on the Endangerment gauge and spectrum bar represents the threshold at which conditions are considered to engage the general obligations to protect civilians from the effects of hostilities — in international armed conflict, Additional Protocol I Articles 51, 57, and 58 (protection of civilians from attack, precautions in attack including effective advance warning, and passive precautions); in non-international armed conflict, which is the governing regime for most of the historical case dataset, Common Article 3 and Additional Protocol II Article 17. These are the provisions that create the affirmative duty to act.</p>
+
+      <p>Article 49 of the Fourth Geneva Convention is deliberately <em>not</em> used as that anchor. Article 49 is primarily a prohibition: it forbids individual or mass forcible transfers and deportations from occupied territory. Evacuation appears within it as a narrow conditional permission for an Occupying Power to evacuate an area where the security of the population or imperative military reasons so demand — and even then the displacement must be temporary, with proper accommodation provided and return as soon as hostilities in the area have ceased. The IHL default is protection in place, with displacement restricted rather than required. Article 49 therefore constrains and conditions an evacuation rather than triggering one, and CERAI applies it in that role: it bears on whether a proposed movement would itself be lawful and protective (the Protection at Destination input), not on whether danger has risen to a level that demands action. Because Article 49 and Additional Protocol I govern international armed conflict and occupation while several anchor cases arose in non-international armed conflict, the framework is read across that line through Common Article 3 and AP II Article 17 rather than by extending Article 49 beyond its scope.</p>
+
+      <p>This threshold was derived through face validity assessment against the historical case dataset — cases above 75% in the dataset consistently involved IHL evacuation obligations being triggered or having been triggered in retrospective legal analysis. Cases below 75% generally involved precautionary planning obligations rather than immediate evacuation demands. The threshold is indicative only and human legal judgment is required in all cases. Above this threshold, the model reflects conditions that historically correlate with IHL obligations; it does not itself create legal obligations.</p>
     </div>
 
     <div class="citation">
@@ -2293,9 +2297,9 @@ function updateBriefing(inp, endangFinal, feasFinal, feasObj, mult) {
   const primary = scores3[0].name;
 
   const ihlObligation = endangFinal >= 75
-    ? 'IHL obligation threshold exceeded. GC IV Art. 49 conditions for mandatory evacuation consideration are met. Immediate escalation to decision-making authorities required.'
+    ? 'IHL obligation threshold exceeded. General protection obligations (AP I Arts. 51/57/58; Common Art. 3 and AP II Art. 17 in NIAC) are squarely engaged. Immediate escalation to decision-making authorities required. Any evacuation adopted in response must itself satisfy GC IV Art. 49 — temporary, to adequate conditions, with return once hostilities in the area cease.'
     : endangFinal >= 65
-    ? 'IHL precautionary obligations under AP I Art. 57 and GCIV Art. 49 are engaged. Evacuation feasibility assessment should be urgently completed.'
+    ? 'IHL precautionary obligations under AP I Arts. 57-58 are engaged. Evacuation feasibility assessment should be urgently completed.'
     : endangFinal >= 50
     ? 'Elevated precautionary obligations under AP I Arts. 57-58. Voluntary evacuation should be actively facilitated where possible.'
     : endangFinal >= 30
