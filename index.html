@@ -914,7 +914,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
         <input type="number" id="totalPop" value="10000" min="1" oninput="dirtyFields.add('totalPop');calcScore()" placeholder="e.g. 50000">
       </div>
       <div class="field">
-        <label>Vulnerable Populations (%) <span class="q" data-tip="Percentage of the population with heightened vulnerability: elderly, disabled, critically ill, unaccompanied minors, pregnant women. Higher percentages require more resources per capita and slower movement. Protected under GCIV Art. 16 and AP I Arts. 77-78.">?</span>
+        <label>Vulnerable Populations (%) <span class="q" data-tip="Percentage of the population with heightened vulnerability: elderly, disabled, critically ill, unaccompanied minors, pregnant women. Higher percentages require more resources per capita and slower movement. Protected under GCIV Art. 16 (wounded, sick, infirm, and expectant mothers); AP I Art. 77 (children in IAC); Customary IHL Rule 138 (older persons and persons with disabilities).">?</span>
           <select class="src-cred" data-field="vulnerablePct"><option value="0.9" selected>NGO Field Report</option><option value="0.7">Unverified/Unknown Source</option><option value="0.8">Media Report</option><option value="1.0">UN Verified</option><option value="1.0">ICRC Verified</option><option value="0.85">Government Official (treat with caution)</option></select>
         </label>
         <div class="range-row">
@@ -954,7 +954,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
     </div>
     <div class="cat-body" id="body-vuln">
       <div class="field">
-        <label>Children Under 12 (%) <span class="q" data-tip="Percentage of the population aged under 12 years. Children require specific protection under AP I Art. 77-78 and GCIV Art. 24. High child populations increase the vulnerability multiplier, amplifying both endangerment and feasibility scores.">?</span>
+        <label>Children Under 12 (%) <span class="q" data-tip="Percentage of the population aged under 12 years. Children require specific protection under AP I Art. 77 and GCIV Arts. 24 and 50. Note: AP I Art. 78 governs only evacuation of children to a foreign country under strict consent conditions and does not apply to internal displacement. High child populations increase the vulnerability multiplier, amplifying both endangerment and feasibility scores.">?</span>
           <select class="src-cred" data-field="childrenPct"><option value="0.9" selected>NGO Field Report</option><option value="0.7">Unverified/Unknown Source</option><option value="0.8">Media Report</option><option value="1.0">UN Verified</option><option value="1.0">ICRC Verified</option><option value="0.85">Government Official (treat with caution)</option></select>
         </label>
         <div class="range-row">
@@ -963,7 +963,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
         </div>
       </div>
       <div class="field">
-        <label>Elderly Over 65 (%) <span class="q" data-tip="Percentage of the population aged over 65 years. Elderly populations have reduced mobility, higher medical needs, and greater reluctance to leave. High elderly proportions increase the vulnerability multiplier.">?</span>
+        <label>Elderly Over 65 (%) <span class="q" data-tip="Percentage of the population aged over 65 years. Older persons have reduced mobility, higher medical needs, and greater reluctance to leave. Protected under Customary IHL Rule 138 (older persons and persons with disabilities). GCIV Art. 16 covers wounded, sick, infirm, and expectant mothers — not specifically the elderly as a category. High elderly proportions increase the vulnerability multiplier.">?</span>
           <select class="src-cred" data-field="elderlyPct"><option value="0.9" selected>NGO Field Report</option><option value="0.7">Unverified/Unknown Source</option><option value="0.8">Media Report</option><option value="1.0">UN Verified</option><option value="1.0">ICRC Verified</option><option value="0.85">Government Official (treat with caution)</option></select>
         </label>
         <div class="range-row">
@@ -1273,7 +1273,7 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
           <tr><td>Dimension 1</td><td>Non-Conflict Hazards</td><td>8%</td><td>Guiding Principles on IDP Principle 5 — all hazards</td></tr>
           <tr><td>Dimension 1</td><td>Food/Water (IPC)</td><td>10%</td><td>GCIV Art. 54 — starvation prohibition; AP I Art. 70</td></tr>
           <tr><td>Dimension 1</td><td>Energy Availability</td><td>6%</td><td>Medical dependency; GCIV Art. 18 hospital protection</td></tr>
-          <tr><td>Dimension 1</td><td>Vulnerable Population %</td><td>5%</td><td>GCIV Art. 16; AP I Arts. 77-78</td></tr>
+          <tr><td>Dimension 1</td><td>Vulnerable Population %</td><td>5%</td><td>GCIV Art. 16 (wounded/sick/infirm/expectant mothers); AP I Art. 77 (children); Customary Rule 138 (older persons)</td></tr>
           <tr><td>Dimension 2 (Zone)</td><td>Corridor Status</td><td>30%</td><td>OCHA AMRF; corridor denial = key encirclement indicator</td></tr>
           <tr><td>Dimension 2 (Zone)</td><td>AG Consent Zone</td><td>28%</td><td>GCIV Art. 49; ICRC access negotiations</td></tr>
           <tr><td>Dimension 2 (Zone)</td><td>Mine Load Zone</td><td>24%</td><td>Ottawa Treaty; UNMAS clearance obligations</td></tr>
@@ -1285,11 +1285,11 @@ h3{font-size:.9rem;font-weight:600;color:var(--text2);text-transform:uppercase;l
           <tr><td>Dimension 2 (Route)</td><td>Distance to Safety</td><td>14%</td><td>Exposure time and logistics constraint</td></tr>
           <tr><td>Dimension 2 (Dest)</td><td>Shelter Availability</td><td>26%</td><td>UNHCR shelter cluster; Guiding Principles P.18</td></tr>
           <tr><td>Dimension 2 (Dest)</td><td>Medical Capacity</td><td>24%</td><td>WHO health cluster; GCIV Art. 18</td></tr>
-          <tr><td>Dimension 2 (Dest)</td><td>Destination Security</td><td>22%</td><td>Non-refoulement; GCIV Art. 147</td></tr>
-          <tr><td>Dimension 2 (Dest)</td><td>Willingness to Receive</td><td>16%</td><td>UNHCR durable solutions framework; non-refoulement principle</td></tr>
+          <tr><td>Dimension 2 (Dest)</td><td>Destination Security</td><td>22%</td><td>Non-refoulement (1951 Refugee Convention Art. 33 / IHRL — distinct legal regime from IHL but engaged where evacuees cross international borders); GCIV Art. 147</td></tr>
+          <tr><td>Dimension 2 (Dest)</td><td>Willingness to Receive</td><td>16%</td><td>UNHCR durable solutions framework; non-refoulement principle (Refugee Convention / IHRL); Guiding Principles P.28</td></tr>
           <tr><td>Dimension 2 (Dest)</td><td>AG Consent (Destination)</td><td>12%</td><td>GCIV Art. 49; ICRC access negotiations doctrine</td></tr>
-          <tr><td>Dimension 3</td><td>Children Under 12 (%)</td><td>amplifier</td><td>AP I Arts. 77-78; GCIV Art. 24 — special protection for children</td></tr>
-          <tr><td>Dimension 3</td><td>Elderly Over 65 (%)</td><td>amplifier</td><td>GCIV Art. 16 — special protection for elderly</td></tr>
+          <tr><td>Dimension 3</td><td>Children Under 12 (%)</td><td>amplifier</td><td>AP I Art. 77; GCIV Arts. 24 and 50 — special protection for children. (AP I Art. 78 governs foreign-country evacuation only.)</td></tr>
+          <tr><td>Dimension 3</td><td>Elderly Over 65 (%)</td><td>amplifier</td><td>Customary IHL Rule 138 — older persons and persons with disabilities. (GCIV Art. 16 covers wounded/sick/infirm/expectant mothers, not specifically the elderly.)</td></tr>
           <tr><td>Dimension 3</td><td>GBV Risk</td><td>amplifier</td><td>UN Women/UNFPA protection monitoring; SGBV as IHL violation</td></tr>
           <tr><td>Dimension 3</td><td>Prior Evacuation Experience</td><td>amplifier (inverse)</td><td>Operational capacity factor</td></tr>
           <tr><td>Dimension 3</td><td>Financial Resources / Mobility</td><td>amplifier (inverse)</td><td>Sen capability approach; entitlement framework</td></tr>

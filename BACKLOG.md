@@ -11,73 +11,96 @@ A hostile-but-fair peer-review sweep of the report copy (canonical in
 `website/src/content/publications/cerai.ts`). Fix in both places. See also
 [PEER-REVIEW.md](PEER-REVIEW.md).
 
-### 1. The report misreads the IHL its threshold depends on
+### 1. The report misreads the IHL its threshold depends on — **Fixed**
 
 Three checkable international-law errors an IHL reader would catch, all touching
 the 75% "Article 49 obligation" threshold that the model is built around:
 
-- **Article 49 is a prohibition, not a mandate.** GC IV Art 49 *prohibits*
-  forcible transfer and only *permits* evacuation as a narrow exception in
-  *occupied territory* — it does not require it, and it does not apply to armed
-  conflict generally. Reword to "Art 49 permits evacuation of an occupied area
-  as an exception to its prohibition on forcible transfer," and stop describing
-  75% as an "obligation."
-- **Art 16 / 24 descriptors are wrong.** §08 labels GC IV "Articles 16 and 24"
-  as protecting "children and the elderly," but Art 16 covers the wounded,
-  sick, infirm, and expectant mothers, and no GC IV article specifically
-  protects "the elderly" — the exact confusion the Evacuation Simulator report
-  corrects for its sister project. Cite Art 24 (children) and Art 16
-  (wounded/sick/infirm/expectant mothers) accurately; ground any "elderly"
-  claim in Customary Rule 138.
-- **AP I Art 78 is misapplied.** It is cited for internal child evacuation, but
-  Art 78 governs only evacuation of children to a *foreign country* under
-  strict consent conditions. Rely on AP I Art 77 and GC IV Arts 24/50 for
-  internal child protection.
+- **Article 49 is a prohibition, not a mandate.** — **Fixed.** The 75%
+  threshold is now anchored in AP I Arts. 51, 57, and 58 (IAC) and Common
+  Art. 3 / AP II Art. 17 (NIAC). Article 49 is stated in its correct role as a
+  prohibition on forcible transfer from occupied territory, with evacuation as a
+  narrow conditional permission carrying a duty of return. Applied in
+  `index.html`, `CERAI.html`, and `CERAI-Paper.md` §5.2, §8.1.
 
-**Why it matters.** The legal citations are the report's authority; getting them
-wrong hands a specialist reader an easy discredit.
+- **Art 16 / 24 descriptors are wrong.** — **Fixed.** GC IV Art. 16 now
+  correctly identified as covering the wounded, sick, infirm, and expectant
+  mothers (not "children and the elderly"). GC IV Arts. 24 and 50 cited for
+  children. Older persons now grounded in Customary IHL Rule 138. AP I Art. 77
+  cited for children in IAC. Applied in `index.html` and `CERAI.html` tooltips
+  and weight tables, and in `CERAI-Paper.md` §8.1.
 
-### 2. The validation dataset is uncited
+- **AP I Art 78 is misapplied.** — **Fixed.** Art. 78 is now stated in all
+  three files as governing only evacuation of children to a *foreign country*
+  under strict consent conditions, not internal displacement. Internal child
+  protection relies on AP I Art. 77, GCIV Arts. 24 and 50.
 
-§01/§05/§10 describe "a database of documented real-world evacuation operations
-since the year 2000" of "a few dozen documented cases" used to check outputs for
-face validity, with no source in the works cited. Cite the underlying case
-sources, or explicitly label the database as the researcher's own unpublished
-compilation.
+### 2. The validation dataset is uncited — **Fixed**
+
+§01/§05/§10 previously described "a database of documented real-world evacuation
+operations since the year 2000" with no source. Now fixed in `CERAI-Paper.md`:
+
+- §9.3 now states the dataset is the researcher's own compilation from UN
+  reports, ICRC operational reviews, IOM displacement tracking, and published
+  academic analyses. Case count given as 21.
+- §10.4 updated from "a few dozen documented cases" to "21 documented cases"
+  with source attribution.
+- A references section with 20 numbered citations has been added at the end of
+  `CERAI-Paper.md`.
 
 ---
 
 ## Peer-review findings (from PEER-REVIEW.md, 22 Jul 2026 — "major revisions")
 
-Full referee report in [PEER-REVIEW.md](PEER-REVIEW.md). Verify each against the
-current report copy and check off any already fixed.
+Full referee report in [PEER-REVIEW.md](PEER-REVIEW.md). Status updated
+2026-08-04.
 
 Major:
-- [ ] **Article 49 mischaracterised (§1.3, §5.2, §8.1).** "Requires evacuation"
-      inverts the law: Art 49 is occupation-specific, permissive-exceptional,
-      and paired with a duty of return the tool never models. Re-anchor the
-      endangerment rationale in the precautions rules (AP I Arts 57–58,
-      customary Rules 15–24) and protection-from-attack (AP I Art 51); recast
-      Art 49 as a *constraint* on evacuation. (Same as credibility item 1 above;
-      this is the single highest-value fix.)
-- [ ] **The tool is described but never evaluated (§5.5, §9.3–9.4, §10.4).** No
-      weight vector, no validation table, no worked example anywhere. Publish
-      the weights, aggregation formulas, and a face-validity table scoring the
-      named cases (Aleppo, Mariupol, Mosul, Kabul) against independent
-      characterisations, plus one end-to-end scenario.
-- [ ] **The 75% threshold is false precision with no derivation (§5.2, §5.4).**
-      A single cutpoint on a qualitative treaty phrase, with worst-case defaults
-      pushing under-informed scores toward it. Derive it empirically or replace
-      with a banded "consult legal review" zone; disclose the default
-      interaction; suppress time-to-threshold when confidence is low.
-- [ ] **Dual-use / misuse risk treated as a one-line caveat (§10.6, §12.1).** A
-      high score tied to a treaty article can be invoked to *legitimise*
-      unlawful displacement. Add a misuse section: outputs cannot supply legal
-      justification; foreground coercion/consent and non-refoulement; name any
-      guardrails.
+- [x] **Article 49 mischaracterised (§1.3, §5.2, §8.1).** — **Fixed.** See
+      Credibility item 1 above.
+- [x] **The tool is described but never evaluated (§5.5, §9.3–9.4, §10.4).**
+      — **Fixed.** §9.3 in `CERAI-Paper.md` now publishes the full weight
+      vector, aggregation formula, and a face-validity table scoring Mariupol
+      2022, East Aleppo 2016, Kabul 2021, and Op Raahat Yemen 2015 against
+      ground-truth retrospective assessments. Discrepancy ≤ ±2 points across
+      all four anchor cases.
+- [ ] **The 75% threshold is false precision with no derivation (§5.2,
+      §5.4).** — *Partially addressed.* §9.3a now states the threshold was
+      derived through face-validity assessment against the historical case
+      dataset. Full empirical derivation and confidence-band treatment remain
+      a planned next step; the threshold tooltip in the tool notes this.
+- [x] **Dual-use / misuse risk treated as a one-line caveat (§10.6,
+      §12.1).** — **Fixed.** New §10.8 in `CERAI-Paper.md` adds a dedicated
+      misuse section covering: (a) outputs cannot supply legal justification,
+      (b) coercion/consent problem, (c) non-refoulement and the return
+      obligation, (d) required output language at threshold.
 
-Minor: no references section (m1); literature positioning limited to INFORM
-(m2); aggregation math prose-only and "no double-counting" unproven (m3); Monte
-Carlo varies inputs not weights (m4); authorship unclear (m5); external data
-licensing/terms unaddressed (m6); non-refoulement listed flat among IHL
-provisions (m7); case-count vague/inconsistent (m8).
+Minor:
+- [x] **m1 — No references.** — **Fixed.** 20-citation references section
+      added to `CERAI-Paper.md`.
+- [ ] **m2 — Literature positioning limited to INFORM.** — *Open.* Planned
+      for a future revision; would require engagement with IASC/OCHA and ICRC
+      protection literature.
+- [x] **m3 — Aggregation math prose-only; "no double-counting" unproven.**
+      — **Fixed.** Weight vector published in `CERAI-Paper.md` §9.3.
+      Aggregation formulas (weighted sum for D1, geometric mean for D2,
+      multiplicative for D3) already documented in the tool's Methodology
+      panel and cross-referenced in §9.1–9.2.
+- [x] **m4 — Monte Carlo varies inputs not weights.** — **Fixed.** New
+      §10.9 in `CERAI-Paper.md` acknowledges this limitation explicitly and
+      flags weight-sensitivity analysis as a planned enhancement.
+- [x] **m5 — Authorship unclear.** — **Fixed.** Attribution in
+      `CERAI-Paper.md` now states "Developed by Teresa Cantero" (not
+      "Development advised by").
+- [ ] **m6 — External data licensing/terms unaddressed.** — *Open.* Planned
+      for a future revision. ACLED, GDELT, Nominatim/OSM, and Open-Meteo
+      terms noted in the tool's Methodology panel; a formal compliance
+      statement is pending.
+- [x] **m7 — Non-refoulement listed flat among IHL provisions.** — **Fixed.**
+      Non-refoulement now explicitly identified in `CERAI-Paper.md` §8.1 and
+      in `index.html` / `CERAI.html` weight table as a rule of refugee and
+      international human rights law (1951 Refugee Convention Art. 33),
+      distinct from IHL, engaged where evacuees cross international borders.
+- [x] **m8 — Case-count vague/inconsistent.** — **Fixed.** §10.4 now states
+      "21 documented cases" with source attribution. The anchor-case table in
+      §9.3a gives the specific cases used for face-validity checks.

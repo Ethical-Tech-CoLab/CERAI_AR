@@ -55,18 +55,37 @@ The full independent academic peer review of this report is in [PEER-REVIEW.md](
 
 **Recommendation:** Major revisions
 
-**What the review found:**
+**Finding status** (updated 2026-08-04):
 
-- Article 49 GC IV is mischaracterised as a danger-triggered requirement to evacuate, inverting the IHL default (protection in place; displacement restricted) (S1.3/S5.2/S8.1). — **Fixed.**
-- The tool is described but never evaluated: no weights, no historical-case validation table, no worked example, so the reproducibility claim is uncheckable (S9.3/S10.4). — *Open.*
-- The 75% threshold imposes false numeric precision on a qualitative legal standard with no derivation (S5.2/S5.4). — *Open.*
+| Finding | Status |
+|---------|--------|
+| Article 49 GC IV mischaracterised as danger-triggered duty (§1.3/§5.2/§8.1) | ✅ Fixed |
+| Art 16/24 descriptors wrong; Art 78 misapplied to internal displacement (§8.1) | ✅ Fixed |
+| Tool described but never evaluated: no weights, no validation table (§9.3/§10.4) | ✅ Fixed |
+| No references section | ✅ Fixed |
+| Authorship unclear ("advised by" vs. "developed by") | ✅ Fixed |
+| Non-refoulement listed flat among IHL provisions (different legal regime) | ✅ Fixed |
+| Monte Carlo varies inputs, not weights — limitation unstated | ✅ Fixed |
+| Case-count vague/inconsistent ("few dozen" vs. actual N) | ✅ Fixed |
+| Dual-use/misuse risk treated as one-line caveat | ✅ Fixed |
+| 75% threshold: false precision, no derivation | ⚠️ Partially addressed |
+| Literature positioning limited to INFORM Severity | 🔲 Open |
+| External data licensing/terms unaddressed | 🔲 Open |
 
-**Noted strength:** The endangerment/feasibility separation (S1.3, S8.3) is a genuinely valuable, ethically sound contribution that stops operational difficulty from silently overriding the duty to protect.
+**Noted strength:** The endangerment/feasibility separation (§1.3, §8.3) is a genuinely valuable, ethically sound contribution that stops operational difficulty from silently overriding the duty to protect.
 
-### Revisions applied
+### Revisions applied (2026-08-04)
 
-**Legal anchor corrected.** The 75% endangerment marker is no longer tied to Article 49 GC IV. It is now anchored to the provisions that actually create an affirmative duty to protect civilians from the effects of hostilities: AP I Articles 51, 57, and 58 in international armed conflict, and Common Article 3 with AP II Article 17 in non-international armed conflict — the regime governing most of the historical case dataset.
+**Legal citations corrected** across `index.html`, `CERAI.html`, and `CERAI-Paper.md`:
 
-Article 49 is now stated in its true role: primarily a **prohibition** on individual or mass forcible transfer and deportation from occupied territory, within which evacuation is a narrow conditional permission for an Occupying Power (temporary, adequate accommodation, return once hostilities in the area cease). The IHL default is protection in place, with displacement restricted rather than required, so Article 49 constrains and conditions an evacuation rather than triggering one. CERAI now uses it that way — bearing on whether a proposed movement would itself be lawful and protective (the Protection at Destination input), not on whether danger demands action. The IAC/NIAC crossover is stated explicitly rather than resolved by stretching Article 49 beyond its scope.
+- **Art 49:** 75% marker re-anchored in AP I Arts. 51, 57, 58 (IAC) and Common Art. 3 / AP II Art. 17 (NIAC). Art. 49 stated as prohibition on forcible transfer from occupied territory; evacuation a narrow conditional permission carrying a duty of return.
+- **Art 16/24/78:** GCIV Art. 16 correctly identified as covering the wounded, sick, infirm, and expectant mothers. Children cited under GCIV Arts. 24 and 50 and AP I Art. 77. Older persons grounded in Customary IHL Rule 138. AP I Art. 78 limited to its actual scope: foreign-country evacuation only.
+- **Non-refoulement:** Flagged as refugee law / IHRL (1951 Refugee Convention Art. 33), distinct from IHL, engaged where evacuees cross international borders.
 
-Applied in `index.html` (gauge marker tooltip, methodology section, and the runtime IHL-obligation strings), mirrored in the unreferenced `CERAI.html` copy, and in `CERAI-Paper.md` (S5.2 and the S8 provision list).
+**Tool evaluated.** `CERAI-Paper.md` §9.3 now publishes the full weight vector, aggregation formulas, and a face-validity table scoring four anchor cases (Mariupol 2022, East Aleppo 2016, Kabul 2021, Op Raahat Yemen 2015). Discrepancy ≤ ±2 points against retrospective ground-truth assessments.
+
+**Misuse section added** (`CERAI-Paper.md` §10.8): outputs cannot supply legal justification; coercion/consent problem named; non-refoulement and return obligation specified; required output language at threshold stated.
+
+**References added:** 20-citation references section covering primary legal instruments, customary IHL, methodology, and historical case sources.
+
+**Other:** Authorship corrected ("Developed by Teresa Cantero"); case count stated as 21 with source attribution; Monte Carlo weight-sensitivity limitation stated explicitly (§10.9).

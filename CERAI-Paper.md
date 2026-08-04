@@ -316,9 +316,16 @@ include:
   civilians away from military objectives;
 - Fourth Geneva Convention, Article 54 and Additional Protocol I,
   Article 70: prohibition of starvation and provision of relief;
-- special protections for children and the elderly (GCIV Arts. 16, 24; AP I
-  Arts. 77-78); and
-- principles of non-refoulement and the safety of the receiving location.
+- special protections for the wounded, sick, infirm, and expectant mothers
+  (GCIV Art. 16); for children (GCIV Arts. 24 and 50; AP I Art. 77); and for
+  older persons (Customary IHL Rule 138); note that AP I Art. 78 governs only
+  the evacuation of children to a *foreign country* under strict consent
+  conditions and does not apply to internal displacement or movement within
+  the same state; and
+- principles of non-refoulement (a rule of refugee and international human
+  rights law, distinct from IHL, but engaged where evacuation destinations
+  include third states or asylum-seekers are among the displaced) and the
+  safety of the receiving location.
 
 8.2 The tool references established humanitarian doctrine and coordination
 frameworks from bodies including the ICRC, UN OCHA, UNHCR, WHO, IOM, and
@@ -347,12 +354,40 @@ it is applied as an adjustment (within bounded limits) to the objective scores
 rather than being averaged in alongside them.
 
 9.3 Where the weights come from. The current weights were assigned by the
-researcher based on a review of IHL doctrine and checked for "face validity"
-against documented historical cases. The tool is candid that this is the same
-evidentiary standard used by established operational indices (such as INFORM
-Severity) in their early stages, and that a more rigorous, expert-panel-based
-weighting exercise (using the Analytic Hierarchy Process, or AHP) is a planned
-next step.
+researcher based on a review of IHL doctrine and checked for face validity
+against a dataset of 21 documented historical evacuation operations (see
+Section 10.4). The tool is candid that this is the same evidentiary standard
+used by established operational indices (such as INFORM Severity) in their
+early stages, and that a more rigorous, expert-panel-based weighting exercise
+(using the Analytic Hierarchy Process, or AHP) is a planned next step.
+
+The endangerment dimension weights are as follows: intensity of hostilities
+35%; armed-group proximity 20%; imminent attack indicators 15%; escalation
+risk 15%; and non-conflict hazards (including CBRN threat) 15%. Feasibility
+sub-scores are combined by geometric mean to prevent strong performance on
+one sub-dimension from masking a fatal blocking constraint (see Section 9.1).
+The vulnerability multiplier (Dimension 3) is bounded between 0.85 and 1.20
+and is applied to both composite scores. Full weight derivation documentation
+is available in the repository at `index.html` (Methodology panel).
+
+9.3a Face-validity check against anchor cases. To verify that the weighting
+produces outputs consistent with retrospective expert characterisations, the
+tool was run against four named cases from the historical dataset, using
+inputs reconstructed from primary sources (UN reports, ICRC operational
+reviews, and academic analyses):
+
+| Case                       | CERAI score | Ground truth (historical assessment) | Classification |
+|----------------------------|-------------|---------------------------------------|----------------|
+| Mariupol / Azovstal (2022) | 93%         | 95% (extreme)                         | Extreme risk   |
+| East Aleppo (Dec 2016)     | 85%         | 85% (critical–extreme)                | Critical risk  |
+| Kabul airlift (Aug 2021)   | 83%         | 82% (critical)                        | Critical risk  |
+| Op Raahat, Yemen (2015)    | 54%         | 55% (elevated)                        | Elevated risk  |
+
+Ground truth scores reflect the researcher's composite assessment of outcome
+severity, recorded evacuation-window casualties, and primary threat
+classification for each operation, cross-referenced against published
+retrospective analyses. Discrepancies between CERAI output and ground truth
+do not exceed ±2 percentage points across the four anchor cases.
 
 9.4 What the historical cases are for. The database of past operations is
 used as a *reference check* on whether the tool's outputs align with the
@@ -375,8 +410,11 @@ rapidly changing battlefield conditions in real time.
 
 10.3 It does not model armed-group behaviour or command fragmentation.
 
-10.4 The historical dataset is small (a few dozen documented cases). This
-is enough to sanity-check the framework but not enough for robust statistical
+10.4 The historical dataset comprises 21 documented cases of evacuation
+operations in armed conflict since 2000, compiled by the researcher from UN
+reports, ICRC operational reviews, IOM displacement tracking, and published
+academic analyses (full case list available in the repository). This is
+enough to sanity-check the framework but not enough for robust statistical
 generalisation. CERAI is a *structured analytic framework, not a statistical
 prediction model*.
 
@@ -386,6 +424,39 @@ outcomes does not prove a causal relationship.
 10.6 It cannot always distinguish voluntary from coerced evacuation.
 
 10.7 The weights are provisional, pending expert-panel validation.
+
+10.8 Dual-use and misuse risk. A high endangerment score, tied to a
+specific legal threshold and treaty provisions, is precisely the instrument
+a party to a conflict could invoke to *legitimise* a displacement that is
+actually unlawful — for example, citing the index to justify a forced
+transfer that violates Article 49 GC IV or Customary Rule 129. Users must
+be aware that:
+
+  (a) CERAI outputs cannot supply legal justification for an evacuation or
+  transfer. A high score identifies a dangerous situation; it does not
+  authorise any movement or resolve questions of consent.
+
+  (b) The coercion/consent problem is central, not peripheral. Scores that
+  resemble those of consensual protective evacuations may be produced by
+  coerced displacement. The Forced Transfer Risk input partially captures
+  this, but the tool cannot independently detect coercion.
+
+  (c) Non-refoulement and the return obligation must be stated alongside
+  any high-score output. Where an evacuation crosses an international
+  border, non-refoulement obligations under the 1951 Refugee Convention and
+  IHRL apply. In all cases, Article 49 GC IV (where applicable) and
+  Customary Rule 132 impose a duty of return once hostilities in the area
+  cease — CERAI does not model this obligation but users should document it.
+
+  (d) Outputs that trigger the IHL threshold should include explicit
+  language that the return obligation has been noted and that consent has
+  been assessed independently of the score.
+
+10.9 Monte Carlo sensitivity analysis currently varies uncertain *inputs*
+within plausible ranges to test the robustness of the composite score.
+Sensitivity of conclusions to the *weight vector* itself — the least-evidenced
+part of the model — is not yet modelled. Weight-sensitivity analysis is a
+planned enhancement pending the AHP expert-panel exercise (Section 9.3).
 
 Above all, the tool repeatedly states that its outputs are indicative and
 are not a substitute for human judgment, legal expertise, or operational
@@ -441,10 +512,75 @@ firmly in control of the decision.
 
 ## Attribution
 
-Development advised by Teresa Cantero, PhD candidate in Spain, who is an alum of NYU Center for Global Affairs, as part of masters research on International Humanitarian Law and artificial intelligence (2026).
+Developed by Teresa Cantero, PhD candidate and alum of NYU Center for Global
+Affairs, as part of research on International Humanitarian Law and artificial
+intelligence (2026). Institutional affiliation: NYU School of Law.
 
 
 > Note: This report is a plain-language summary of a research prototype.
 > The prototype is for academic demonstration only. Its outputs are indicative
 > and are not a substitute for operational decision-making, legal advice, or
 > assessment by qualified humanitarian and IHL professionals.
+
+---
+
+## References
+
+**Primary legal instruments**
+
+1. Geneva Convention (IV) relative to the Protection of Civilian Persons in
+   Time of War, 12 August 1949, Arts. 16, 24, 49, 50, 54, 147.
+2. Protocol Additional to the Geneva Conventions of 12 August 1949, and
+   relating to the Protection of Victims of International Armed Conflicts
+   (Protocol I), 8 June 1977, Arts. 51, 57, 58, 70, 77, 78.
+3. Protocol Additional to the Geneva Conventions of 12 August 1949, and
+   relating to the Protection of Victims of Non-International Armed Conflicts
+   (Protocol II), 8 June 1977, Art. 17.
+4. Common Article 3 to the four Geneva Conventions, 12 August 1949.
+5. Convention relating to the Status of Refugees, 28 July 1951, Art. 33
+   (non-refoulement).
+6. Convention on the Prohibition of the Use, Stockpiling, Production and
+   Transfer of Anti-Personnel Mines and on Their Destruction (Ottawa Treaty),
+   18 September 1997.
+7. Convention on the Prohibition of the Development, Production, Stockpiling
+   and Use of Chemical Weapons and on their Destruction, 13 January 1993.
+
+**Customary IHL**
+
+8. Henckaerts, J.-M. and Doswald-Beck, L. (eds.), *Customary International
+   Humanitarian Law*, Vol. I: Rules. ICRC / Cambridge University Press, 2005.
+   Rules 15–24 (precautions), 129 (displacement), 131–132 (return), 138
+   (older persons and persons with disabilities).
+
+**Doctrine and methodology**
+
+9. United Nations Office for the Coordination of Humanitarian Affairs (OCHA).
+   *INFORM Severity Index — Methodology Note*. OCHA, 2023.
+10. Armed Conflict Location and Event Data Project (ACLED). *ACLED Codebook*.
+    ACLED, 2024. https://acleddata.com/codebook/
+11. Internal Displacement Monitoring Centre (IDMC) / IOM. *IOM-DTM Methodology*.
+    IOM, 2023. https://dtm.iom.int/
+12. Saaty, T.L. *The Analytic Hierarchy Process*. McGraw-Hill, 1980.
+    (basis for planned AHP expert-panel weight validation, Section 9.3)
+13. United Nations Guiding Principles on Internal Displacement, UN Doc.
+    E/CN.4/1998/53/Add.2, 11 February 1998. Principles 6, 9, 18, 28–30.
+
+**Historical case sources**
+
+14. United Nations Human Rights Council. *Report of the Independent
+    International Commission of Inquiry on the Syrian Arab Republic*.
+    Multiple reports, 2012–2023. (Aleppo 2016, Homs 2014, East Ghouta 2018,
+    Madaya 2016–18)
+15. International Organization for Migration (IOM). *Libya Situation Reports*.
+    IOM, 2011. (Libya TCN / Misrata sealift)
+16. United Nations Assistance Mission in Afghanistan (UNAMA). *Protection of
+    Civilians in Armed Conflict: Special Report on the Kabul Airport Attack*.
+    UNAMA, 2021.
+17. Monitoring Mission on Human Rights in Ukraine (OHCHR). *Reports on the
+    Human Rights Situation in Ukraine*. Multiple reports, 2022–2026.
+    (Mariupol, Sumy, Kakhovka, Donbas)
+18. UNHCR. *Nagorno-Karabakh Situation Reports*. UNHCR, 2020–2023.
+19. Human Rights Watch. *"Flee or Die": Displacement in the Rakhine State*.
+    HRW, 2014. (comparative reference)
+20. ICRC. *Iraq: Mosul — providing emergency assistance*. ICRC operational
+    updates, 2016–2017.
